@@ -37,6 +37,15 @@
         "string": "cpp",
         "bitset": "cpp",
         "random": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "chrono": "cpp",
+        "cstddef": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "deque": "cpp",
+        "functional": "cpp",
+        "iomanip": "cpp",
+        "ratio": "cpp",
+        "variant": "cpp"
     }
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "digest.hpp"
+#include <iostream>
 
 namespace dla
 {
@@ -10,6 +11,10 @@ namespace dla
     std::vector<uint8_t> digest::execute()
     {
         uint8_t digest[SHA256_DIGEST_LENGTH];
+        for (int i = 0; i < data.size(); i++)
+        {
+            std::cout << (int) data[i] << std::endl;
+        }
         SHA256(&data[0], data.size(), (uint8_t*) &digest);    
         data = std::vector<uint8_t>(std::begin(digest), std::end(digest));
         return data;
