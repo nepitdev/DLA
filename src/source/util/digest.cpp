@@ -1,7 +1,6 @@
 #pragma once
 
 #include "digest.hpp"
-#include <iostream>
 
 namespace dla
 {

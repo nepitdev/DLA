@@ -11,6 +11,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
 	g++ -c -o $@ $<
 
-clean: dla
+clean:
 	rm -r $(OBJ_DIR)
 	$(MAKE) dla
