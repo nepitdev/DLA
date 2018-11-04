@@ -10,3 +10,7 @@ dla: $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
 	g++ -c -o $@ $<
+
+clean:
+	rm -r $(OBJ_DIR)
+	$(MAKE) dla
