@@ -18,8 +18,8 @@ namespace dla
     item_a::item_a (bytestream& stream)
     {
         uint8_t mask = 63;
-        val = 61;
-        while (val == 61)
+        val = R;
+        while (val == R)
         {
             uint8_t temp = stream.next();
             temp = temp & mask;

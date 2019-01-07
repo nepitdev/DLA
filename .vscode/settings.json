@@ -46,6 +46,8 @@
         "functional": "cpp",
         "iomanip": "cpp",
         "ratio": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp"
     }
 }
