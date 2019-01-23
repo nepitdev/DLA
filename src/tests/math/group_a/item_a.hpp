@@ -35,6 +35,26 @@ TEST_CASE("Items from group A should be constructable using an bytestream")
     REQUIRE(x.getval() == 42);
 }
 
+TEST_CASE("The byte array of an item from group A should match its value") 
+{
+    dla::item_a x = 42_a;
+    std::vector<uint8_t> bytes = x.getBytes();
+    REQUIRE(bytes.size() == 1);
+    REQUIRE(x.getval() == bytes[0]);
+}
+
+TEST_CASE("Items in group A should only be saltable if setting the high order bit to one does not make the item smaller") 
+{
+    dla::item_a x = 12_a;
+    dla::item_a y = 42_a;
+    REQUIRE(x.canBeSalted());
+    REQUIRE(!y.canBeSalted());
+    dla::item_a z = x + dla::item_a::HIGH_ORDER_BIT;
+    dla::item_a w = y + dla::item_a::HIGH_ORDER_BIT;
+    REQUIRE(z.getval() > x.getval());
+    REQUIRE(w.getval() < y.getval());
+}
+
 TEST_CASE("Items in group A that share the same value should be equal") 
 {
     dla::item_a x = 42_a;
