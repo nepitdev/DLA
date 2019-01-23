@@ -5,7 +5,35 @@
 #include <cinttypes>
 #include <sstream>
 #include <vector>
+#include "../../../source/util/bytestream.hpp"
 #include "../../../source/math/group_a/item_a.hpp"
+
+TEST_CASE("The default value of items in group A should be zero") 
+{
+    dla::item_a x;
+
+    REQUIRE(x == dla::item_a::ZERO);
+}
+
+TEST_CASE("Items from group A should be constructable using an 8-bit integer") 
+{
+    uint8_t n = 7;
+    dla::item_a x(n);
+
+    REQUIRE(x.getval() == n);
+}
+
+TEST_CASE("Items from group A should be constructable using an bytestream") 
+{
+    class teststream : public dla::bytestream { 
+        uint8_t next() { return 42; }
+    };
+    teststream s;
+    
+    dla::item_a x(s);
+
+    REQUIRE(x.getval() == 42);
+}
 
 TEST_CASE("Items in group A that share the same value should be equal") 
 {
