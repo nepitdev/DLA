@@ -54,7 +54,7 @@ TEST_CASE("Items in group A should obay the assosiative property of addition")
 TEST_CASE("Items in group A should obay the identity property of addition") 
 {
     dla::item_a x = 54_a;
-    dla::item_a y = 0_a;
+    dla::item_a y = dla::item_a::ZERO;
 
     REQUIRE(x + y == x);
     REQUIRE(y + x == x);
@@ -72,7 +72,7 @@ TEST_CASE("Items in group A should obay modular subtraction")
 TEST_CASE("Items in group A should obay the identity property of subtraction") 
 {
     dla::item_a x = 54_a;
-    dla::item_a y = 0_a;
+    dla::item_a y = dla::item_a::ZERO;
 
     REQUIRE(x - y == x);
 }
@@ -108,7 +108,7 @@ TEST_CASE("Items in group A should obay the assosiative property of multiplicati
 TEST_CASE("Items in group A should obay the identity property of multiplication") 
 {
     dla::item_a x = 54_a;
-    dla::item_a y = 1_a;
+    dla::item_a y = dla::item_a::UNIT;
 
     REQUIRE(x * y == x);
     REQUIRE(y * x == x);
@@ -126,7 +126,7 @@ TEST_CASE("Items in group A should obay modular division")
 TEST_CASE("Items in group A should obay the identity property of division") 
 {
     dla::item_a x = 54_a;
-    dla::item_a y = 1_a;
+    dla::item_a y = dla::item_a::UNIT;
 
     REQUIRE(x / y == x);
 }
@@ -134,7 +134,7 @@ TEST_CASE("Items in group A should obay the identity property of division")
 TEST_CASE("An item in group A minus itself should equal zero") 
 {
     dla::item_a x = 42_a;
-    dla::item_a y = 0_a;
+    dla::item_a y = dla::item_a::ZERO;
 
     REQUIRE(x - x == y);
 }
@@ -150,7 +150,7 @@ TEST_CASE("Adding a negative to an item in group A should be the same as subtrac
 TEST_CASE("An item in group A divided by itself should equal one") 
 {
     dla::item_a x = 42_a;
-    dla::item_a y = 1_a;
+    dla::item_a y = dla::item_a::UNIT;
 
     REQUIRE(x / x == y);
 }
