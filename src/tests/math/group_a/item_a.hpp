@@ -162,3 +162,43 @@ TEST_CASE("Multiplying a riciprical by an item in group A should be the same as 
 
     REQUIRE(x * (!y) == x / y);
 }
+
+TEST_CASE("Incrementing an item from group A should function similarly to addition") 
+{
+    dla::item_a x = 54_a;
+    dla::item_a y = 10_a;
+    dla::item_a z = x;
+    z += y;
+
+    REQUIRE(x + y == z);
+}
+
+TEST_CASE("Decrementing an item from group A should function similarly to subtraction") 
+{
+    dla::item_a x = 3_a;
+    dla::item_a y = 10_a;
+    dla::item_a z = x;
+    z -= y;
+
+    REQUIRE(x - y == z);
+}
+
+TEST_CASE("Scaling an item from group A should function similarly to multiplication") 
+{
+    dla::item_a x = 23_a;
+    dla::item_a y = 32_a;
+    dla::item_a z = x;
+    z *= y;
+
+    REQUIRE(x * y == z);
+}
+
+TEST_CASE("Factoring an item from group A should function similarly to division") 
+{
+    dla::item_a x = 4_a;
+    dla::item_a y = 32_a;
+    dla::item_a z = x;
+    z /= y;
+
+    REQUIRE(x / y == z);
+}
