@@ -3,6 +3,7 @@
 
 #include "math/group_a/item_a.hpp"
 #include "math/group_a/set_a.hpp"
+#include "math/matrix.hpp"
 
 #include "util/digest.hpp"
 #include "util/rand.hpp"
