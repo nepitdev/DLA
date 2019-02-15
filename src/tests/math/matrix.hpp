@@ -64,35 +64,35 @@ TEST_CASE("getrow and getcol should return an apropriate dla vector")
 
 TEST_CASE("desalt should revurse salt")
 {
-    dla::rand rng;
-    dla::matrix<dla::item_a> m(4, 4, rng);
+    dla::matrix<dla::item_a> m(4, 4);
     dla::matrix<dla::item_a> w(4, 4);
+    uint8_t data[16] = 
+    { 7, 12, 28, 15, 7, 21, 6, 19, 10, 3, 16, 1, 9, 23, 25, 4 };
     for (int c = 0; c < 4; c++) {
         for (int r = 0; r < 4; r++) {
-            if (m.getitm(r, c).getval() > 32)
-                m.setitm(r, c, dla::item_a(m.getitm(r, c).getval() - 32));
-            w.setitm(r, c, dla::item_a(m.getitm(r, c).getval()));
+            m.setitm(r, c, dla::item_a(data[4*c+r]));
+            w.setitm(r, c, dla::item_a(data[4*c+r]));
         }
     }
     w.salt();
     w.desalt();
     for (int c = 0; c < 4; c++) {
         for (int r = 0; r < 4; r++) {
-            REQUIRE(m.getitm(r, c).getval() == w.getitm(r, c).getval());
+            REQUIRE(+m.getitm(r, c).getval() == +w.getitm(r, c).getval());
         }
     }
 }
 
 TEST_CASE("salt should not revurse desalt")
 {
-    dla::rand rng;
-    dla::matrix<dla::item_a> m(4, 4, rng);
+    dla::matrix<dla::item_a> m(4, 4);
     dla::matrix<dla::item_a> w(4, 4);
+    uint8_t data[16] = 
+    { 7, 12, 28, 15, 7, 21, 6, 19, 10, 3, 16, 1, 9, 23, 25, 4 };
     for (int c = 0; c < 4; c++) {
         for (int r = 0; r < 4; r++) {
-            if (m.getitm(r, c).getval() > 32)
-                m.setitm(r, c, dla::item_a(m.getitm(r, c).getval() - 32));
-            w.setitm(r, c, dla::item_a(m.getitm(r, c).getval()));
+            m.setitm(r, c, dla::item_a(data[4*c+r]));
+            w.setitm(r, c, dla::item_a(data[4*c+r]));
         }
     }
     w.desalt();
@@ -100,7 +100,7 @@ TEST_CASE("salt should not revurse desalt")
     bool allElementsMatch = true;
     for (int c = 0; c < 4; c++) {
         for (int r = 0; r < 4; r++) {
-            if (m.getitm(r, c).getval() != w.getitm(r, c).getval()) {
+            if (+m.getitm(r, c).getval() != +w.getitm(r, c).getval()) {
                 allElementsMatch = false;
                 break;
             }
@@ -108,4 +108,124 @@ TEST_CASE("salt should not revurse desalt")
         if (!allElementsMatch) break;
     }
     REQUIRE(!allElementsMatch);
+}
+
+TEST_CASE("Matrix multiplication and division should be inverses")
+{
+    dla::matrix<dla::item_a> m(4, 4);
+    dla::matrix<dla::item_a> w(4, 4);
+    uint8_t data1[16] = 
+    { 7, 12, 28, 15, 7, 21, 6, 19, 10, 3, 16, 1, 9, 23, 25, 4 };
+    uint8_t data2[16] = 
+    { 14, 31, 12, 2, 0, 3, 31, 10, 26, 7, 24, 26, 13, 5, 9, 20 };
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            m.setitm(r, c, dla::item_a(data1[4*c+r]));
+            w.setitm(r, c, dla::item_a(data2[4*c+r]));
+        }
+    }
+
+    dla::matrix<dla::item_a> a(0, 0), b(0, 0);
+    a = m * w;
+    a = a / w;
+
+    b = m / w;
+    b = b * w;
+
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            REQUIRE(+m.getitm(r, c).getval() == +a.getitm(r, c).getval());
+            REQUIRE(+m.getitm(r, c).getval() == +b.getitm(r, c).getval());
+        }
+    }
+}
+
+TEST_CASE("Matrix definition should create the correct matrix")
+{
+    dla::matrix<dla::item_a> m(4, 4);
+    dla::matrix<dla::item_a> k(4, 4);
+    uint8_t data1[16] = 
+    { 7, 12, 28, 15, 7, 21, 6, 19, 10, 3, 16, 1, 9, 23, 25, 4 };
+    uint8_t data2[16] = 
+    { 14, 31, 12, 2, 0, 3, 31, 10, 26, 7, 24, 26, 13, 5, 9, 20 };
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            m.setitm(r, c, dla::item_a(data1[4*c+r]));
+            k.setitm(r, c, dla::item_a(data2[4*c+r]));
+        }
+    }
+
+    auto w = m * k;
+    auto z = m % w;
+
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            REQUIRE(+z.getitm(r, c).getval() == +k.getitm(r, c).getval());
+        }
+    }
+}
+
+TEST_CASE("Transpose of a transpose of a matrix should be the original matrix")
+{
+    dla::matrix<dla::item_a> m(4, 4);
+    uint8_t data1[16] = 
+    { 7, 12, 28, 15, 7, 21, 6, 19, 10, 3, 16, 1, 9, 23, 25, 4 };
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            m.setitm(r, c, dla::item_a(data1[4*c+r]));
+        }
+    }
+
+    auto w = ~(~m);
+
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            REQUIRE(+m.getitm(r, c).getval() == +w.getitm(r, c).getval());
+        }
+    }
+}
+
+TEST_CASE("Invurse of the invurse of a matrix should be the original matrix")
+{
+    dla::matrix<dla::item_a> m(4, 4);
+    uint8_t data1[16] = 
+    { 7, 12, 28, 15, 7, 21, 6, 19, 10, 3, 16, 1, 9, 23, 25, 4 };
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            m.setitm(r, c, dla::item_a(data1[4*c+r]));
+        }
+    }
+
+    auto w = !(!m);
+
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            REQUIRE(+m.getitm(r, c).getval() == +w.getitm(r, c).getval());
+        }
+    }
+}
+
+TEST_CASE("Multiplying by the invurse should be the same as division")
+{
+    dla::matrix<dla::item_a> m(4, 4);
+    dla::matrix<dla::item_a> w(4, 4);
+    uint8_t data1[16] = 
+    { 7, 12, 28, 15, 7, 21, 6, 19, 10, 3, 16, 1, 9, 23, 25, 4 };
+    uint8_t data2[16] = 
+    { 14, 31, 12, 2, 0, 3, 31, 10, 26, 7, 24, 26, 13, 5, 9, 20 };
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            m.setitm(r, c, dla::item_a(data1[4*c+r]));
+            w.setitm(r, c, dla::item_a(data2[4*c+r]));
+        }
+    }
+
+    auto z = m / w;
+    auto s = m * (!w);
+
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            REQUIRE(+z.getitm(r, c).getval() == +s.getitm(r, c).getval());
+        }
+    }
 }
