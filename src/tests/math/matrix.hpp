@@ -62,6 +62,24 @@ TEST_CASE("getrow and getcol should return an apropriate dla vector")
     REQUIRE(m.getcol(0)[1] == 3);
 }
 
+TEST_CASE("getitm, getrow, and getcol should throw an exception for indecies that are out of bounds")
+{
+    dla::matrix<int> m(2, 2);
+    m.setitm(0, 0, 1);
+    m.setitm(0, 1, 2);
+    m.setitm(1, 0, 3);
+    m.setitm(1, 1, 4);
+    
+    REQUIRE_THROWS(m.getitm(2,1));
+    REQUIRE_THROWS(m.getitm(1,2));
+    REQUIRE_THROWS(m.getitm(-1,1));
+    REQUIRE_THROWS(m.getitm(1,-1));
+    REQUIRE_THROWS(m.getrow(-1));
+    REQUIRE_THROWS(m.getrow(2));
+    REQUIRE_THROWS(m.getcol(-1));
+    REQUIRE_THROWS(m.getcol(2));
+}
+
 TEST_CASE("desalt should revurse salt")
 {
     dla::matrix<dla::item_a> m(4, 4);

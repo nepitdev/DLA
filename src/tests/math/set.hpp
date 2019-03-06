@@ -17,7 +17,9 @@ TEST_CASE("A set should be able to hold arbitrary payloads")
         testset(): set(8, 8, 8) { }
     };
 
-    testset t;
+    REQUIRE_NOTHROW([&](){
+        testset t;
+    }());
 }
 
 TEST_CASE("A set should be able to be filled with raw data") 
