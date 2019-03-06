@@ -83,8 +83,8 @@ namespace dla
         BUFFER reg = formated_data[0];
         BUFFER mask = pow(2, ITEM_SIZE) - 1;
         int pos = BYTE_SIZE - 1;
-        
-        while (reg & (1 << pos) == 0) pos--;
+
+        while ((reg & (1 << pos)) == 0) pos--;
         pos--;
 
         int count = formated_data.size();

@@ -61,7 +61,7 @@ namespace dla
     template < class T >
     dla::vector<T> matrix<T>::getcol (int col) const
     {
-        return data[col];
+        return data.at(col);
     }
 
     template < class T >

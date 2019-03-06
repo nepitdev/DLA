@@ -37,7 +37,7 @@ namespace dla
     template < class T >
     T& vector<T>::operator[] (int index)
     {
-        return data[index];
+        return data.at(index);
     }
 
     template < class T >
