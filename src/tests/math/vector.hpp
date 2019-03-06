@@ -3,7 +3,7 @@
 #include "../catch.hpp"
 
 #include <cstdint>
-#include <iostream>
+#include <vector>
 #include "../../source/math/vector.hpp"
 #include "../../source/math/group_a/item_a.hpp"
 #include "../../source/util/digest.hpp"
