@@ -1,5 +1,3 @@
-#pragma once
-
 #include "digest.hpp"
 
 namespace dla

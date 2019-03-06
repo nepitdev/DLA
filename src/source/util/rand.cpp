@@ -1,5 +1,3 @@
-#pragma once
-
 #include "rand.hpp"
 
 namespace dla

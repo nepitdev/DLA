@@ -1,5 +1,3 @@
-#pragma once
-
 #include "set_a.hpp"
 
 namespace dla

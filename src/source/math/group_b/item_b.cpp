@@ -1,5 +1,3 @@
-#pragma once
-
 #include "item_b.hpp"
 
 namespace dla
