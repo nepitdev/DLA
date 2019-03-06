@@ -2,6 +2,8 @@
 
 #include "../catch.hpp"
 
+#include <cstdint>
+#include <vector>
 #include "../../source/math/matrix.hpp"
 #include "../../source/math/vector.hpp"
 #include "../../source/math/group_a/item_a.hpp"
