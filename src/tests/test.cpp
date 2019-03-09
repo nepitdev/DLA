@@ -3,6 +3,8 @@
 
 #include "math/group_a/item_a.hpp"
 #include "math/group_a/set_a.hpp"
+#include "math/group_c/item_c.hpp"
+#include "math/group_c/set_c.hpp"
 #include "math/matrix.hpp"
 #include "math/set.hpp"
 #include "math/vector.hpp"
