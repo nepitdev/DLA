@@ -21,7 +21,7 @@ TEST_CASE("A group C set should be able to be filled with raw data")
     }
 }
 
-TEST_CASE("Convernting to a matrix and formating should not alter the raw data of a group C set") 
+TEST_CASE("Convernting to a matrix should not alter the raw data of a group C set") 
 {
     dla::set_c1 s;
     std::vector<uint8_t> v;
@@ -31,6 +31,23 @@ TEST_CASE("Convernting to a matrix and formating should not alter the raw data o
     v.push_back(4);
     s.setRawData(v);
     s.setMatrix(s.getMatrix());
+    std::vector<uint8_t> w = s.getRawData();
+
+    REQUIRE(v.size() == w.size());
+    for (int i = 0; i < v.size(); i++) {
+        REQUIRE(v[i] == w[i]);
+    }
+}
+
+TEST_CASE("Formating should not alter the raw data of a group C set") 
+{
+    dla::set_c1 s;
+    std::vector<uint8_t> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    v.push_back(4);
+    s.setRawData(v);
     s.setFormatedData(s.getFormatedData());
     std::vector<uint8_t> w = s.getRawData();
 

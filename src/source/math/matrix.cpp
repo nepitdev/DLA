@@ -67,14 +67,16 @@ namespace dla
     template < class T >
     T matrix<T>::getitm (int row, int col) const
     {
-        dla::vector<T> vec = data[col];
+        dla::vector<T> vec = getcol(col);
         return vec[row];
     }
 
     template < class T >
     void matrix<T>::setitm (int row, int col, T val)
     {
-        data[col][row] = val;
+        dla::vector<T> vec = data.at(col);
+        vec[row] = val;
+        data.at(col) = vec;
     }
 
     template < class T >

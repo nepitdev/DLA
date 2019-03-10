@@ -46,7 +46,6 @@ TEST_CASE("Convernting to formated data should not alter the raw data of a set")
     v.push_back(3);
     v.push_back(4);
     s.setRawData(v);
-
     s.setFormatedData(s.getFormatedData());
     std::vector<uint8_t> w = s.getRawData();
 

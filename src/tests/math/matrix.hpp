@@ -82,6 +82,20 @@ TEST_CASE("getitm, getrow, and getcol should throw an exception for indecies tha
     REQUIRE_THROWS(m.getcol(2));
 }
 
+TEST_CASE("setitm should throw an exception for indecies that are out of bounds")
+{
+    dla::matrix<dla::item_a> m(2, 2);
+    m.setitm(0, 0, 1_a);
+    m.setitm(0, 1, 2_a);
+    m.setitm(1, 0, 3_a);
+    m.setitm(1, 1, 4_a);
+    
+    REQUIRE_THROWS(m.setitm(2,1, 0_a));
+    REQUIRE_THROWS(m.setitm(1,2, 0_a));
+    REQUIRE_THROWS(m.setitm(-1,1, 0_a));
+    REQUIRE_THROWS(m.setitm(1,-1, 0_a));
+}
+
 TEST_CASE("desalt should revurse salt")
 {
     dla::matrix<dla::item_a> m(4, 4);
