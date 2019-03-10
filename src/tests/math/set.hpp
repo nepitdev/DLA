@@ -74,20 +74,6 @@ TEST_CASE("Convernting to a matrix should not alter the raw data of a set")
     }
 }
 
-TEST_CASE("Specifice items should be addressable") 
-{
-    dla::set_a1 s;
-    std::vector<uint8_t> v;
-    v.push_back(1);
-    v.push_back(2);
-    v.push_back(3);
-    v.push_back(4);
-    s.setRawData(v);
-    for (int i = 0; i < 8; i++) {
-        REQUIRE(s[i] * 0_a == 0_a);
-    }
-}
-
 TEST_CASE("The size of a set should be a correct") 
 {
     dla::set_a1 s;

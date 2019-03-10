@@ -21,7 +21,7 @@ namespace dla
         bool canBeSalted() const;
         bool isSalted() const;
 
-        static const uint16_t R = 65521;
+        static const uint32_t R = 65521;
         static const item_c ZERO;
         static const item_c UNIT;
         static const item_c HIGH_ORDER_BIT;

@@ -5,7 +5,7 @@
 
 namespace dla
 {
-    class set_c1 : public item_c
+    class set_c1 : public set_c
     {
     private:
         static const int BLOCK_SIZE = 15;
