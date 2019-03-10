@@ -219,7 +219,7 @@ TEST_CASE("Transpose of a transpose of a matrix should be the original matrix")
     }
 }
 
-TEST_CASE("Invurse of the invurse of a matrix should be the original matrix")
+TEST_CASE("inverse of the inverse of a matrix should be the original matrix")
 {
     dla::matrix<dla::item_a> m(4, 4);
     uint8_t data1[16] = 
@@ -239,7 +239,7 @@ TEST_CASE("Invurse of the invurse of a matrix should be the original matrix")
     }
 }
 
-TEST_CASE("Multiplying by the invurse should be the same as division")
+TEST_CASE("Multiplying by the inverse should be the same as division")
 {
     dla::matrix<dla::item_a> m(4, 4);
     dla::matrix<dla::item_a> w(4, 4);

@@ -1,6 +1,6 @@
-#include "invurse_table_c.hpp"
+#include "inverse_table_c.hpp"
 
-const uint16_t dla::invurse_table_c::L[] =
+const uint16_t dla::inverse_table_c::L[] =
 {
 0x0000,
 0x0001,

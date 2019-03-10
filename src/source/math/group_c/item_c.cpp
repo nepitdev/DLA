@@ -1,6 +1,6 @@
 #include "item_c.hpp"
 
-#include "invurse_table_c.hpp"
+#include "inverse_table_c.hpp"
 
 namespace dla
 {
@@ -118,7 +118,7 @@ namespace dla
 
     item_c item_c::operator!() const
     {
-        return item_c(invurse_table_c::L[this->val]);
+        return item_c(inverse_table_c::L[this->val]);
     }
 }
 
