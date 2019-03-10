@@ -10,7 +10,6 @@ namespace dla
     class item_b
     {
     private:
-        static const uint16_t R = 251;
         uint8_t val;
         uint16_t mathval() const;
     public:
@@ -22,6 +21,7 @@ namespace dla
         bool canBeSalted() const;
         bool isSalted() const;
 
+        static const uint16_t R = 251;
         static const item_b ZERO;
         static const item_b UNIT;
         static const item_b HIGH_ORDER_BIT;

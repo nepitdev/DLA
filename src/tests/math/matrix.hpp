@@ -14,7 +14,7 @@ TEST_CASE("A matrix should be constructable with a set number of rows and cols")
 {
     int r = 6;
     int c = 4;
-    dla::matrix<int> m(r, c);
+    dla::matrix<dla::item_a> m(r, c);
 
     REQUIRE(m.numrows() == r);
     REQUIRE(m.numcols() == c);
@@ -41,36 +41,36 @@ TEST_CASE("A matrix should be constructable with a byte stream")
 
 TEST_CASE("A matrix should be constructable with a set of dla vectors")
 {
-    std::vector<dla::vector<int>> v {
-        dla::vector<int>(2),
-        dla::vector<int>(2),
-        dla::vector<int>(2),
+    std::vector<dla::vector<dla::item_a>> v {
+        dla::vector<dla::item_a>(2),
+        dla::vector<dla::item_a>(2),
+        dla::vector<dla::item_a>(2),
     };
 
-    dla::matrix<int> m(v);
+    dla::matrix<dla::item_a> m(v);
     REQUIRE(m.numrows() == 2);
     REQUIRE(m.numcols() == 3);
 }
 
 TEST_CASE("getrow and getcol should return an apropriate dla vector")
 {
-    dla::matrix<int> m(2, 2);
-    m.setitm(0, 0, 1);
-    m.setitm(0, 1, 2);
-    m.setitm(1, 0, 3);
-    m.setitm(1, 1, 4);
+    dla::matrix<dla::item_a> m(2, 2);
+    m.setitm(0, 0, 1_a);
+    m.setitm(0, 1, 2_a);
+    m.setitm(1, 0, 3_a);
+    m.setitm(1, 1, 4_a);
     
-    REQUIRE(m.getrow(0)[1] == 2);
-    REQUIRE(m.getcol(0)[1] == 3);
+    REQUIRE(m.getrow(0)[1] == 2_a);
+    REQUIRE(m.getcol(0)[1] == 3_a);
 }
 
 TEST_CASE("getitm, getrow, and getcol should throw an exception for indecies that are out of bounds")
 {
-    dla::matrix<int> m(2, 2);
-    m.setitm(0, 0, 1);
-    m.setitm(0, 1, 2);
-    m.setitm(1, 0, 3);
-    m.setitm(1, 1, 4);
+    dla::matrix<dla::item_a> m(2, 2);
+    m.setitm(0, 0, 1_a);
+    m.setitm(0, 1, 2_a);
+    m.setitm(1, 0, 3_a);
+    m.setitm(1, 1, 4_a);
     
     REQUIRE_THROWS(m.getitm(2,1));
     REQUIRE_THROWS(m.getitm(1,2));
@@ -80,6 +80,20 @@ TEST_CASE("getitm, getrow, and getcol should throw an exception for indecies tha
     REQUIRE_THROWS(m.getrow(2));
     REQUIRE_THROWS(m.getcol(-1));
     REQUIRE_THROWS(m.getcol(2));
+}
+
+TEST_CASE("setitm should throw an exception for indecies that are out of bounds")
+{
+    dla::matrix<dla::item_a> m(2, 2);
+    m.setitm(0, 0, 1_a);
+    m.setitm(0, 1, 2_a);
+    m.setitm(1, 0, 3_a);
+    m.setitm(1, 1, 4_a);
+    
+    REQUIRE_THROWS(m.setitm(2,1, 0_a));
+    REQUIRE_THROWS(m.setitm(1,2, 0_a));
+    REQUIRE_THROWS(m.setitm(-1,1, 0_a));
+    REQUIRE_THROWS(m.setitm(1,-1, 0_a));
 }
 
 TEST_CASE("desalt should revurse salt")
@@ -205,7 +219,7 @@ TEST_CASE("Transpose of a transpose of a matrix should be the original matrix")
     }
 }
 
-TEST_CASE("Invurse of the invurse of a matrix should be the original matrix")
+TEST_CASE("inverse of the inverse of a matrix should be the original matrix")
 {
     dla::matrix<dla::item_a> m(4, 4);
     uint8_t data1[16] = 
@@ -225,7 +239,7 @@ TEST_CASE("Invurse of the invurse of a matrix should be the original matrix")
     }
 }
 
-TEST_CASE("Multiplying by the invurse should be the same as division")
+TEST_CASE("Multiplying by the inverse should be the same as division")
 {
     dla::matrix<dla::item_a> m(4, 4);
     dla::matrix<dla::item_a> w(4, 4);
