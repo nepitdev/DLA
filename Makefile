@@ -9,7 +9,7 @@ dla: $(OBJ_FILES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
-	g++ -c -o $@ $<
+	g++ -c -g -o $@ $<
 
 clean:
 	rm -r $(OBJ_DIR)
@@ -20,7 +20,7 @@ cleanTest:
 	$(MAKE) buildTest
 
 buildTest: $(OBJ_FILES)
-	g++ -o "catch-dla.exe" $^ $(LIBS)
+	g++ -g -o "catch-dla.exe" $^ $(LIBS)
 	$(MAKE) runTest
 
 runTest:
