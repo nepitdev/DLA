@@ -35,11 +35,15 @@ TEST_CASE("Items from group C should be constructable using an bytestream")
     REQUIRE(x.getval() == 10794);
 }
 
-TEST_CASE("The byte array of an item from group C should have a length of 2") 
+TEST_CASE("An item from group C and its vector of bytes should have the same value") 
 {
-    dla::item_c x = 42_c;
+    dla::item_c x = 543_c;
     std::vector<uint8_t> bytes = x.getBytes();
     REQUIRE(bytes.size() == 2);
+    uint16_t val = 0;
+    for (int i = 0; i < 2; i++)
+        val += bytes[i] << ((1 - i) * 8);
+    REQUIRE(val == x.getval());
 }
 
 TEST_CASE("Items in group C should only be saltable if setting the high order bit to one does not make the item smaller") 

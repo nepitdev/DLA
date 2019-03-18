@@ -39,7 +39,7 @@ namespace dla
         uint16_t mask = 255;
         std::vector<uint8_t> bytes;
         for (int i = 1; i >= 0; i--)
-            bytes.push_back(val & (mask << (8*i)));
+            bytes.push_back((val & (mask << (8*i))) >> (8*i));
         return bytes;
     }
 
