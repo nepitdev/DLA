@@ -1,8 +1,7 @@
-#pragma once
-
 #include "../catch.hpp"
 
 #include <cinttypes>
+#include <iomanip>
 #include <sstream>
 #include <vector>
 #include "../../source/util/rand.hpp"

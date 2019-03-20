@@ -1,5 +1,3 @@
-#pragma once
-
 #include "../../catch.hpp"
 
 #include <cinttypes>
@@ -15,9 +13,9 @@ TEST_CASE("The default value of items in group C should be zero")
     REQUIRE(x == dla::item_c::ZERO);
 }
 
-TEST_CASE("Items from group C should be constructable using an 8-bit integer") 
+TEST_CASE("Items from group C should be constructable using an 16-bit integer") 
 {
-    uint8_t n = 7;
+    uint16_t n = 263;
     dla::item_c x(n);
 
     REQUIRE(x.getval() == n);
