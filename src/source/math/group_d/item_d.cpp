@@ -20,7 +20,7 @@ namespace dla
         while (val == R)
         {
             uint32_t temp = 0;
-            for (int i = 1; i >= 0; i--)
+            for (int i = 3; i >= 0; i--)
                 temp += stream.next() << (8 * i);
             temp = temp & mask;
             if (temp < R) val = temp % R;
@@ -37,13 +37,13 @@ namespace dla
         uint32_t mask = 255;
         std::vector<uint8_t> bytes;
         for (int i = 3; i >= 0; i--)
-            bytes.push_back(val & (mask << (8*i)));
+            bytes.push_back((val & (mask << (8*i))) >> (8*i));
         return bytes;
     }
 
     bool item_d::canBeSalted() const
     {
-        return ((int) val < (int) (R - HIGH_ORDER_BIT.val));
+        return ((int64_t) val < (int64_t) (R - HIGH_ORDER_BIT.val));
     }
 
     bool item_d::isSalted() const
@@ -53,7 +53,7 @@ namespace dla
 
     const item_d item_d::ZERO = 0_d;
     const item_d item_d::UNIT = 1_d;
-    const item_d item_d::HIGH_ORDER_BIT = 32768_d;
+    const item_d item_d::HIGH_ORDER_BIT = 2147483648_d;
 
     item_d item_d::operator+(item_d const& x) const
     {
@@ -116,7 +116,34 @@ namespace dla
 
     item_d item_d::operator!() const
     {
-        //TODO implement extended euclidian algorythum
+        if (val == 0) return ZERO;
+
+        std::vector<int64_t> x;
+        std::vector<int64_t> k;
+        
+        x.push_back(R);
+        x.push_back(val);
+        k.push_back(0);
+
+        int n = 1;
+        while (x[n] > 1)
+        {
+            k.push_back(x[n-1] / x[n]);
+            x.push_back(x[n-1] % x[n]);
+            n++;
+        }
+
+        std::vector<int64_t> q;
+        q.push_back(1);
+        q.push_back(-k[n-1]);
+        
+        for (int i = 2; i < n; i++)
+        {
+            q.push_back(q[i-2]-(q[i-1]*k[n-i]));
+        }
+
+        int32_t inv = q[n-1] < 0 ? q[n-1] + R : q[n-1];
+        return item_d(inv);
     }
 }
 

@@ -7,7 +7,7 @@
 
 namespace dla
 {
-    class set_d : public set<item_d, uint32_t> {
+    class set_d : public set<item_d, uint64_t> {
     private:
         static const int PAYLOAD_SIZE = 31;
         static const int ITEM_SIZE = 32;
