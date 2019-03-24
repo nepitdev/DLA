@@ -18,4 +18,5 @@ run-test:
 	./dla-test.exe
 
 gen-report: clean build-test
-	./dla-test.exe -r junit >> report.xml
+	mkdir test-results
+	./dla-test.exe -r junit >> test-results/report.xml
