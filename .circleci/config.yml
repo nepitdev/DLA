@@ -6,8 +6,8 @@ jobs:
     steps:
       - checkout
       - run: make gen-report
-    store_test_results:
-      path: test-results
+      - store_test_results:
+          path: test-results
 
 workflows:
   version: 2
