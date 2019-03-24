@@ -9,7 +9,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	g++ -c -g -o $@ $<
 
 clean:
-	rm -r $(OBJ_DIR)
+	rm -r -f $(OBJ_DIR)
 
 build-test: $(OBJ_FILES)
 	g++ -g -o "dla-test.exe" $^ $(LIBS)
