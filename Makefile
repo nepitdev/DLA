@@ -4,27 +4,18 @@ SRC_FILES := $(shell find $(SRC_DIR)/ -type f -name *.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 LIBS := -lcrypto
 
-dla: $(OBJ_FILES)
-	g++ -o "dla.exe" $^ $(LIBS)
-
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
 	g++ -c -g -o $@ $<
 
 clean:
 	rm -r $(OBJ_DIR)
-	$(MAKE) dla
 
-cleanTest:
-	rm -r $(OBJ_DIR)
-	$(MAKE) buildTest
+build-test: $(OBJ_FILES)
+	g++ -g -o "dla-test.exe" $^ $(LIBS)
 
-buildTest: $(OBJ_FILES)
-	g++ -g -o "catch-dla.exe" $^ $(LIBS)
-	$(MAKE) runTest
+run-test:
+	./dla-test.exe
 
-runTest:
-	./catch-dla.exe
-
-test:
-	$(MAKE) cleanTest
+gen-report: clean build-test
+	./dla-test.exe -r junit >> report.xml
