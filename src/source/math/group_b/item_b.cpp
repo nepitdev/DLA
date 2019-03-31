@@ -34,7 +34,8 @@ namespace dla
 
     std::vector<uint8_t> item_b::getBytes() const
     {
-        return std::vector<uint8_t>(val);
+        std::vector<uint8_t> vec = {val};
+        return vec;
     }
 
     bool item_b::canBeSalted() const
