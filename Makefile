@@ -18,5 +18,6 @@ run-test:
 	./dla-test.exe
 
 gen-report: clean build-test
-	mkdir test-results test-results/catch
+	mkdir -p test-results test-results/catch
+	rm -f test-results/catch/results.xml
 	./dla-test.exe -r junit >> test-results/catch/results.xml
