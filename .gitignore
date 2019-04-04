@@ -6,4 +6,5 @@ obj/
 !.vscode/launch.json
 !.vscode/extensions.json
 dla-test.exe
+dla.exe
 test-results/catch/results.xml

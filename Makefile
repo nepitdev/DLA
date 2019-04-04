@@ -1,7 +1,13 @@
 SRC_DIR := src
 OBJ_DIR := obj
 SRC_FILES := $(shell find $(SRC_DIR)/ -type f -name *.cpp)
-OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+OBJ_FILES := $(filter-out obj/source/main.o, $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES)))
+
+REL_DIR := src/source
+BIN_DIR := obj/source
+REL_FILES := $(shell find $(REL_DIR)/ -type f -name *.cpp)
+BIN_FILES := $(patsubst $(REL_DIR)/%.cpp,$(BIN_DIR)/%.o,$(REL_FILES))
+
 LIBS := -lcrypto
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -13,6 +19,9 @@ clean:
 
 build-test: $(OBJ_FILES)
 	g++ -g -o "dla-test.exe" $^ $(LIBS)
+
+build-release: $(BIN_FILES)
+	g++ -g -o "dla.exe" $^ $(LIBS)
 
 run-test:
 	./dla-test.exe
