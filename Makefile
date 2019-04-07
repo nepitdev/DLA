@@ -9,19 +9,20 @@ REL_FILES := $(shell find $(REL_DIR)/ -type f -name *.cpp)
 BIN_FILES := $(patsubst $(REL_DIR)/%.cpp,$(BIN_DIR)/%.o,$(REL_FILES))
 
 LIBS := -lcrypto
+FLAGS := -g
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
-	g++ -c -g -o $@ $<
+	g++ -c $(FLAGS) -o $@ $<
 
 clean:
 	rm -r -f $(OBJ_DIR)
 
 build-test: $(OBJ_FILES)
-	g++ -g -o "dla-test.exe" $^ $(LIBS)
+	g++ $(FLAGS) -o "dla-test.exe" $^ $(LIBS)
 
 build-release: $(BIN_FILES)
-	g++ -g -o "dla.exe" $^ $(LIBS)
+	g++ $(FLAGS) -o "dla.exe" $^ $(LIBS)
 
 run-test:
 	./dla-test.exe
