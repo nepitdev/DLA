@@ -54,6 +54,8 @@
         "complex": "cpp",
         "list": "cpp",
         "thread": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "strstream": "cpp",
+        "valarray": "cpp"
     }
 }
