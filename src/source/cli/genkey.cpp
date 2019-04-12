@@ -40,11 +40,17 @@ namespace dla
             cmd->fail("Flag '-o' must be followed by a file name");
             return;
         }
+        boost::filesystem::path ofile(cmd->getFlag("-o"));
+        auto odir = boost::filesystem::absolute(ofile).parent_path();
+        if (!boost::filesystem::exists(odir))
+        {
+            cmd->fail("Directory '" + odir.string() + "' does not exist");
+            return;
+        }
     }
 
     void genkey::exec(command* cmd)
     {
-        rand r;
         char group = cmd->getFlag("-g").at(0);
         int size = std::stoi(cmd->getFlag("-s"));
         std::vector<uint8_t> data;
@@ -68,11 +74,28 @@ namespace dla
                 data = buildKeyOfSize<item_d, set_d1, set_d2, set_d3, set_d4>(size);
                 break;
             default:
-                cmd->fail("Group '" + cmd->getFlag("-g") + "' is not a valid group");
+                cmd->fail("Group '" + cmd->getFlag("-g") + "' is not valid");
         }
+
+        if (data.size() == 0)
+        {
+            cmd->fail("Size '" + cmd->getFlag("-s") + "' is not valid");
+        }
+
         
 
-        std::cout << "I dont do anything yet!" << std::endl;
+        boost::filesystem::path ofile(cmd->getFlag("-o"));
+        boost::filesystem::ofstream ofs{ofile};
+        
+        ofs << "DLA 1.0 K"
+            << "/" << cmd->getFlag("-g")
+            << "/" << cmd->getFlag("-s")
+            << "/" << "SHA256"
+            << " : ";
+
+        std::string binary(data.begin(), data.end());
+        ofs << boost::beast::detail::base64_encode(binary);
+
         return;
     }
 }

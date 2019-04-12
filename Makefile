@@ -8,7 +8,7 @@ BIN_DIR := obj/source
 REL_FILES := $(shell find $(REL_DIR)/ -type f -name *.cpp)
 BIN_FILES := $(patsubst $(REL_DIR)/%.cpp,$(BIN_DIR)/%.o,$(REL_FILES))
 
-LIBS := -lcrypto
+LIBS := -lcrypto -lboost_system -lboost_filesystem
 FLAGS := -g
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
