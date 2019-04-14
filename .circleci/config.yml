@@ -5,7 +5,7 @@ jobs:
       - image: gcc:latest
     steps:
       - checkout
-      - run: sudo apt-get install libboost-all-dev
+      - run: apt-get install libboost-all-dev
       - run: make gen-report
       - store_test_results:
           path: test-results
