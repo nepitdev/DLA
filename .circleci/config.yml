@@ -5,7 +5,7 @@ jobs:
       - image: gcc:latest
     steps:
       - checkout
-      - run: ls -l /usr/lib/
+      - run: ls -l /usr/share/include/
       - run: apt-get update
       - run: apt-get install libboost-all-dev -y
       - run: make gen-report
