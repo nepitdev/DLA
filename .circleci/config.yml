@@ -2,10 +2,12 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: teeks99/boost-cpp-docker:latest
+      - image: gcc:latest
     steps:
       - checkout
-      - run: make gen-report
+      - run:
+        - sudo apt-get install libboost-all-dev
+        - make gen-report
       - store_test_results:
           path: test-results
 
