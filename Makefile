@@ -13,16 +13,16 @@ FLAGS := -g
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
-	g++ -c $(FLAGS) -o $@ $<
+	g++ -c $(FLAGS) -o $@ $< -I /usr/include/
 
 clean:
 	rm -r -f $(OBJ_DIR)
 
 build-test: $(OBJ_FILES)
-	g++ $(FLAGS) -o "dla-test.exe" $^ $(LIBS)
+	g++ $(FLAGS) -o "dla-test.exe" $^ $(LIBS) -L/usr/lib/
 
 build-release: $(BIN_FILES)
-	g++ $(FLAGS) -o "dla.exe" $^ $(LIBS)
+	g++ $(FLAGS) -o "dla.exe" $^ $(LIBS) -L/usr/lib/
 
 run-test:
 	./dla-test.exe
