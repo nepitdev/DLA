@@ -2,7 +2,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: kcyeu/boost:latest
+      - image: teeks99/boost-cpp-docker:latest
     steps:
       - checkout
       - run: make gen-report
