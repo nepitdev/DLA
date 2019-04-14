@@ -2,7 +2,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: gcc:latest
+      - image: reaverproject/gcc-boost:latest
     steps:
       - checkout
       - run: make gen-report

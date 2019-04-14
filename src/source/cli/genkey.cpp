@@ -41,18 +41,45 @@ namespace dla
             return;
         }
         boost::filesystem::path ofile(cmd->getFlag("-o"));
+        if (boost::filesystem::is_regular_file(ofile))
+        {
+            cmd->fail("File '" + boost::filesystem::absolute(ofile).string() + "' already exist");
+            return;
+        }
         auto odir = boost::filesystem::absolute(ofile).parent_path();
         if (!boost::filesystem::exists(odir))
         {
             cmd->fail("Directory '" + odir.string() + "' does not exist");
             return;
         }
+
+        std::string mode = cmd->getFlag("-m");
+        if (!isalpha(mode.at(0)))
+        {
+            cmd->fail("Mode '" + mode + "' is invalid, the mode must begin with a letter");
+            return;
+        }
+        try
+        {
+            int size = boost::lexical_cast<int>(mode.substr(1, mode.size()-1));
+            if (size < 0)
+            {
+                cmd->fail("Mode '" + mode + "' is invalid, the mode must end with a whole number");
+                return;
+            }
+        }
+        catch (boost::bad_lexical_cast &)
+        {
+            cmd->fail("Mode '" + mode + "' is invalid, the mode must end with a whole number");
+            return;
+        }
     }
 
     void genkey::exec(command* cmd)
     {
-        char group = cmd->getFlag("-g").at(0);
-        int size = std::stoi(cmd->getFlag("-s"));
+        std::string mode = cmd->getFlag("-m");
+        char group = mode.at(0);
+        int size = std::stoi(mode.substr(1,mode.size()-1));
         std::vector<uint8_t> data;
 
         switch (group)
@@ -74,22 +101,21 @@ namespace dla
                 data = buildKeyOfSize<item_d, set_d1, set_d2, set_d3, set_d4>(size);
                 break;
             default:
-                cmd->fail("Group '" + cmd->getFlag("-g") + "' is not valid");
+                cmd->fail("Group '" + std::string(1, group) + "' is not valid");
+                return;
         }
 
         if (data.size() == 0)
         {
-            cmd->fail("Size '" + cmd->getFlag("-s") + "' is not valid");
+            cmd->fail("Size '" + std::to_string(size) + "' is not valid");
+            return;
         }
-
-        
 
         boost::filesystem::path ofile(cmd->getFlag("-o"));
         boost::filesystem::ofstream ofs{ofile};
         
         ofs << "DLA 1.0 K"
-            << "/" << cmd->getFlag("-g")
-            << "/" << cmd->getFlag("-s")
+            << "/" << mode
             << "/" << "SHA256"
             << " : ";
 
