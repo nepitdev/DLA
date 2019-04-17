@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <vector>
-#include "../../source/math/set.hpp"
+#include "../../src/math/set.hpp"
 
 TEST_CASE("A set should be able to hold arbitrary payloads") 
 {

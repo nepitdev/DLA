@@ -2,9 +2,9 @@
 
 #include <cstdint>
 #include <vector>
-#include "../../source/math/vector.hpp"
-#include "../../source/math/group_a/item_a.hpp"
-#include "../../source/util/digest.hpp"
+#include "../../src/math/vector.hpp"
+#include "../../src/math/group_a/item_a.hpp"
+#include "../../src/util/digest.hpp"
 
 TEST_CASE("An empty vector should have no elements") 
 {

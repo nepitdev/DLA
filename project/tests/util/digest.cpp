@@ -3,7 +3,7 @@
 #include <cinttypes>
 #include <sstream>
 #include <vector>
-#include "../../source/util/digest.hpp"
+#include "../../src/util/digest.hpp"
 
 TEST_CASE("Digest should calculate SHA-256") 
 {

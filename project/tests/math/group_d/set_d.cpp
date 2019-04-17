@@ -1,11 +1,11 @@
 #include "../../catch.hpp"
 
-#include "../../../source/math/group_b/set_b.hpp"
-#include "../../../source/math/group_b/set_b1.hpp"
+#include "../../../src/math/group_d/set_d.hpp"
+#include "../../../src/math/group_d/set_d1.hpp"
 
-TEST_CASE("A group B set should be able to be filled with raw data") 
+TEST_CASE("A group D set should be able to be filled with raw data") 
 {
-    dla::set_b1 s;
+    dla::set_d1 s;
     std::vector<uint8_t> v;
     v.push_back(1);
     v.push_back(2);
@@ -19,9 +19,9 @@ TEST_CASE("A group B set should be able to be filled with raw data")
     }
 }
 
-TEST_CASE("Convernting to a matrix should not alter the raw data of a group B set") 
+TEST_CASE("Convernting to a matrix should not alter the raw data of a group D set") 
 {
-    dla::set_b1 s;
+    dla::set_d1 s;
     std::vector<uint8_t> v;
     v.push_back(1);
     v.push_back(2);
@@ -37,9 +37,9 @@ TEST_CASE("Convernting to a matrix should not alter the raw data of a group B se
     }
 }
 
-TEST_CASE("Formating should not alter the raw data of a group B set") 
+TEST_CASE("Formating should not alter the raw data of a group D set") 
 {
-    dla::set_b1 s;
+    dla::set_d1 s;
     std::vector<uint8_t> v;
     v.push_back(1);
     v.push_back(2);
@@ -55,11 +55,11 @@ TEST_CASE("Formating should not alter the raw data of a group B set")
     }
 }
 
-TEST_CASE("The size of a group B set should be a correct") 
+TEST_CASE("The size of a group D set should be a correct") 
 {
-    dla::set_b1 s;
+    dla::set_d1 s;
     std::vector<uint8_t> v;
-    for (int i = 1; i <= 6; i++)
+    for (int i = 1; i <= 30; i++)
         v.push_back(i);
     s.setRawData(v);
     REQUIRE(s.size() == 8);

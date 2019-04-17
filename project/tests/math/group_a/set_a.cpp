@@ -1,11 +1,18 @@
 #include "../../catch.hpp"
 
-#include "../../../source/math/group_c/set_c.hpp"
-#include "../../../source/math/group_c/set_c1.hpp"
+#include "../../../src/math/group_a/set_a1.hpp"
 
-TEST_CASE("A group C set should be able to be filled with raw data") 
+TEST_CASE("A set of Group A should buildable using base64") 
 {
-    dla::set_c1 s;
+    dla::set_a1 s;
+    std::string b64 = "0123456789abcde";
+    s.setBase64(b64);
+    REQUIRE(b64 == s.getBase64());
+}
+
+TEST_CASE("A group A set should be able to be filled with raw data") 
+{
+    dla::set_a1 s;
     std::vector<uint8_t> v;
     v.push_back(1);
     v.push_back(2);
@@ -19,9 +26,9 @@ TEST_CASE("A group C set should be able to be filled with raw data")
     }
 }
 
-TEST_CASE("Convernting to a matrix should not alter the raw data of a group C set") 
+TEST_CASE("Convernting to a matrix should not alter the raw data of a group A set") 
 {
-    dla::set_c1 s;
+    dla::set_a1 s;
     std::vector<uint8_t> v;
     v.push_back(1);
     v.push_back(2);
@@ -37,9 +44,9 @@ TEST_CASE("Convernting to a matrix should not alter the raw data of a group C se
     }
 }
 
-TEST_CASE("Formating should not alter the raw data of a group C set") 
+TEST_CASE("Formating should not alter the raw data of a group A set") 
 {
-    dla::set_c1 s;
+    dla::set_a1 s;
     std::vector<uint8_t> v;
     v.push_back(1);
     v.push_back(2);
@@ -55,27 +62,17 @@ TEST_CASE("Formating should not alter the raw data of a group C set")
     }
 }
 
-TEST_CASE("The size of a group C set should be a correct") 
+TEST_CASE("The size of a group A set should be a correct") 
 {
-    dla::set_c1 s;
+    dla::set_a1 s;
     std::vector<uint8_t> v;
     v.push_back(1);
     v.push_back(2);
     v.push_back(3);
     v.push_back(4);
-    v.push_back(5);
-    v.push_back(6);
-    v.push_back(7);
-    v.push_back(8);
-    v.push_back(9);
-    v.push_back(10);
-    v.push_back(11);
-    v.push_back(12);
-    v.push_back(13);
-    v.push_back(14);
     s.setRawData(v);
     REQUIRE(s.size() == 8);
-    v.push_back(15);
+    v.push_back(5);
     s.setRawData(v);
     REQUIRE(s.size() == 16);
 }

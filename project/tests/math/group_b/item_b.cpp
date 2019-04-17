@@ -3,8 +3,8 @@
 #include <cinttypes>
 #include <sstream>
 #include <vector>
-#include "../../../source/util/bytestream.hpp"
-#include "../../../source/math/group_b/item_b.hpp"
+#include "../../../src/util/bytestream.hpp"
+#include "../../../src/math/group_b/item_b.hpp"
 
 TEST_CASE("The default value of items in group B should be zero") 
 {

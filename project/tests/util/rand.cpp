@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <sstream>
 #include <vector>
-#include "../../source/util/rand.hpp"
+#include "../../src/util/rand.hpp"
 
 TEST_CASE("Two different rands should have different outputs") 
 {

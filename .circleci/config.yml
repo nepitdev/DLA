@@ -1,14 +1,11 @@
 version: 2.0
 jobs:
   build:
-    docker:
-      - image: gcc:latest
+    machine: true
     steps:
       - checkout
-      - run: apt-get update
-      - run: apt-get install libboost-all-dev -y
-      - run: ls -l /usr/include/
-      - run: make gen-report
+      - run: docker build -t dla-test
+      - run: docker run -v test-results:/usr/src/project/test-results dla-test
       - store_test_results:
           path: test-results
 

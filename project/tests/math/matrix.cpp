@@ -2,11 +2,11 @@
 
 #include <cstdint>
 #include <vector>
-#include "../../source/math/matrix.hpp"
-#include "../../source/math/vector.hpp"
-#include "../../source/math/group_a/item_a.hpp"
-#include "../../source/util/bytestream.hpp"
-#include "../../source/util/rand.hpp"
+#include "../../src/math/matrix.hpp"
+#include "../../src/math/vector.hpp"
+#include "../../src/math/group_a/item_a.hpp"
+#include "../../src/util/bytestream.hpp"
+#include "../../src/util/rand.hpp"
 
 TEST_CASE("A matrix should be constructable with a set number of rows and cols") 
 {

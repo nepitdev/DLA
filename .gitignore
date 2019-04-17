@@ -1,5 +1,5 @@
-dla
-obj/
+bin/
+project/test-results/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -7,4 +7,3 @@ obj/
 !.vscode/extensions.json
 dla-test.exe
 dla.exe
-test-results/catch/results.xml
