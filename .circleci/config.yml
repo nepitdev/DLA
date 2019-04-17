@@ -6,7 +6,7 @@ jobs:
       - checkout
       - run: mkdir test-results
       - run: docker build -t dla-test .
-      - run: docker run -v test-results:/usr/src/project/test-results dla-test
+      - run: docker run -v ~/project/test-results:/usr/src/project/test-results dla-test
       - store_test_results:
           path: test-results
 
