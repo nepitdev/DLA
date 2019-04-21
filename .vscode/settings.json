@@ -56,6 +56,9 @@
         "thread": "cpp",
         "typeindex": "cpp",
         "strstream": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "condition_variable": "cpp",
+        "csignal": "cpp",
+        "mutex": "cpp"
     }
 }

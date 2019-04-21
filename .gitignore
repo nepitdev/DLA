@@ -1,5 +1,5 @@
 bin/
-project/test-results/
+test-results/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

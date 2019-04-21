@@ -3,6 +3,7 @@
 #include <bitset>
 #include "set.hpp"
 #include "../util/rand.hpp"
+#include <iostream>
 
 namespace dla
 {

@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "program.hpp"
+#include "programs/program.hpp"
 
 namespace dla
 {

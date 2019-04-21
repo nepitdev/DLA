@@ -6,10 +6,12 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/beast/core/detail/base64.hpp>
-#include "program.hpp"
 
-#include "../util/rand.hpp"
-#include "../math/matrix.hpp"
+#include "program.hpp"
+#include "../../util/rand.hpp"
+#include "../../math/matrix.hpp"
+#include "../flags/oflag.hpp"
+#include "../flags/mflag.hpp"
 
 namespace dla
 {
