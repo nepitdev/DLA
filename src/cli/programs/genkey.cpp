@@ -73,7 +73,7 @@ namespace dla
         boost::filesystem::ofstream ofs{ofile};
         
         ofs << "DLA 1.0 K"
-            << "/" << mode
+            << "/" << (char) toupper(group) << size
             << "/" << "SHA256"
             << " : ";
 
