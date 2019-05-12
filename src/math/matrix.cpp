@@ -91,7 +91,7 @@ namespace dla
 
         vector<T> iv(rows);
         for (int i = 0; i < rows; i++)
-            iv[i] = T(rng.next(0, 60));
+            iv[i] = T(rng);
         data.insert(data.begin(), iv);
         cols++;
 

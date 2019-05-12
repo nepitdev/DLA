@@ -43,12 +43,12 @@ namespace dla
 
     bool item_d::canBeSalted() const
     {
-        return ((int64_t) val < (int64_t) (R - HIGH_ORDER_BIT.val));
+        return ((uint64_t) val < (uint64_t) (R - HIGH_ORDER_BIT.val));
     }
 
     bool item_d::isSalted() const
     {
-        return ((int) val >= (int) (HIGH_ORDER_BIT.val));
+        return ((uint64_t) val >= (uint64_t) (HIGH_ORDER_BIT.val));
     }
 
     const item_d item_d::ZERO = 0_d;

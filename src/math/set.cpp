@@ -130,7 +130,7 @@ namespace dla
             }
         }
         int P = raw_data[raw_data.size()-1] % BLOCK_SIZE;
-        P = (P == 0) ? 5 : P;
+        P = (P == 0) ? BLOCK_SIZE : P;
         for (int i = 0; i < P; i++)
         {
             raw_data.pop_back();
