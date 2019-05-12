@@ -5,6 +5,16 @@ namespace dla
 {
     bool mflag::doesFail(command* cmd)
     {
+        if (!cmd->hasFlag("-m"))
+        {
+            cmd->fail("This command requires the flag '-m'");
+            return true;
+        }
+        if (cmd->getFlag("-m") == "")
+        {
+            cmd->fail("Flag '-m' must be followed by a string");
+            return true;
+        }
         std::string mode = cmd->getFlag("-m");
         if (!isalpha(mode.at(0)))
         {

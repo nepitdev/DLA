@@ -30,7 +30,7 @@ build-test: $(CATCH_TARGET)
 build-release: $(SRC_TARGET)
 	g++ $(FLAGS) -o "dla.exe" $^ $(LIBS)
 
-run-test:
+run-test: build-test
 	./dla-test.exe
 
 gen-report: clean build-test
