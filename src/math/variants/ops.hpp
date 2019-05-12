@@ -1,3 +1,4 @@
+#pragma once
 #include "types.hpp"
 
 namespace dla
@@ -51,25 +52,22 @@ namespace dla
     }
 
     template <class T>
-    static void _salt (vmatrix a) {
+    static vmatrix _salt (vmatrix a) {
         T x = boost::get<T>(a);
         x.salt();
+        return x;
     }
 
-    static void salt (vmatrix a) {
+    static vmatrix salt (vmatrix a) {
         switch(a.which()) {
             case 0:
-                _salt<matrix<item_a>>(a);
-                break;
+                return _salt<matrix<item_a>>(a);
             case 1:
-                _salt<matrix<item_b>>(a);
-                break;
+                return _salt<matrix<item_b>>(a);
             case 2:
-                _salt<matrix<item_c>>(a);
-                break;
+                return _salt<matrix<item_c>>(a);
             case 3:
-                _salt<matrix<item_d>>(a);
-                break;
+                return _salt<matrix<item_d>>(a);
         }
     }
 
@@ -77,22 +75,19 @@ namespace dla
     static vmatrix _desalt (vmatrix a) {
         T x = boost::get<T>(a);
         x.desalt();
+        return x;
     }
 
-    static void desalt (vmatrix a) {
+    static vmatrix desalt (vmatrix a) {
         switch(a.which()) {
             case 0:
-                _desalt<matrix<item_a>>(a);
-                break;
+                return _desalt<matrix<item_a>>(a);
             case 1:
-                _desalt<matrix<item_b>>(a);
-                break;
+                return _desalt<matrix<item_b>>(a);
             case 2:
-                _desalt<matrix<item_c>>(a);
-                break;
+                return _desalt<matrix<item_c>>(a);
             case 3:
-                _desalt<matrix<item_d>>(a);
-                break;
+                return _desalt<matrix<item_d>>(a);
         }
     }
 
@@ -125,6 +120,38 @@ namespace dla
                 return _getdata<item_c, set_c1, set_c2, set_c3, set_c4>(x);
             case 3:
                 return _getdata<item_d, set_d1, set_d2, set_d3, set_d4>(x);
+        }
+    }
+
+    template<class I, class S>
+    static std::vector<uint8_t> _getraw (matrix<I> x)
+    {
+        S s;
+        s.setMatrix(x);
+        return s.getRawData();
+    }
+
+    template<class I, class S1, class S2, class S3, class S4>
+    static std::vector<uint8_t> _getraw (vmatrix a) {
+        matrix<I> x = boost::get<matrix<I>>(a);
+        int size = x.numrows();
+        if (size == 8)  return _getraw<I, S1>(x);
+        if (size == 16) return _getraw<I, S2>(x);
+        if (size == 24) return _getraw<I, S3>(x);
+        if (size == 32) return _getraw<I, S4>(x);
+        return std::vector<uint8_t>();
+    }
+
+    static std::vector<uint8_t> getraw (vmatrix x) {
+        switch(x.which()) {
+            case 0:
+                return _getraw<item_a, set_a1, set_a2, set_a3, set_a4>(x);
+            case 1:
+                return _getraw<item_b, set_b1, set_b2, set_b3, set_b4>(x);
+            case 2:
+                return _getraw<item_c, set_c1, set_c2, set_c3, set_c4>(x);
+            case 3:
+                return _getraw<item_d, set_d1, set_d2, set_d3, set_d4>(x);
         }
     }
 }

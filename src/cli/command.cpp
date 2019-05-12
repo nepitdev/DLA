@@ -3,13 +3,15 @@
 #include <iostream>
 #include "programs/genkey.hpp"
 #include "programs/enciph.hpp"
+#include "programs/deciph.hpp"
 
 namespace dla
 {
     std::map<std::string, std::shared_ptr<dla::program>> command::programs =
     {
         { "genkey", std::make_shared<genkey>() },
-        { "enciph", std::make_shared<enciph>() }
+        { "enciph", std::make_shared<enciph>() },
+        { "deciph", std::make_shared<deciph>() }
     };
 
     bool command::delegate(int mode)

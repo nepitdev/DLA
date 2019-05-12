@@ -1,9 +1,9 @@
-#include "enciph.hpp"
+#include "deciph.hpp"
 #include "../command.hpp"
 
 namespace dla
 {
-    void enciph::verify(command* cmd)
+    void deciph::verify(command* cmd)
     {
         iflag ix; if (ix.doesFail(cmd)) return;
         oflag ox; if (ox.doesFail(cmd)) return;
@@ -11,7 +11,7 @@ namespace dla
         mflag mx; if (mx.doesFail(cmd)) return;
     }
 
-    void enciph::exec(command* cmd)
+    void deciph::exec(command* cmd)
     {
         std::string mode = cmd->getFlag("-m");
         char type = mode.at(0);
@@ -46,26 +46,24 @@ namespace dla
         {
             case 'A':
                 key = importMatrixOfSize<item_a, set_a1, set_a2, set_a3, set_a4>(size, keydata);
-                mat = buildMatrixOfSize<item_a, set_a1, set_a2, set_a3, set_a4>(size, matdata);
+                mat = importMatrixOfSize<item_a, set_a1, set_a2, set_a3, set_a4>(size, matdata);
                 break;
             case 'B':
                 key = importMatrixOfSize<item_b, set_b1, set_b2, set_b3, set_b4>(size, keydata);
-                mat = buildMatrixOfSize<item_b, set_b1, set_b2, set_b3, set_b4>(size, matdata);
+                mat = importMatrixOfSize<item_b, set_b1, set_b2, set_b3, set_b4>(size, matdata);
                 break;
             case 'C':
                 key = importMatrixOfSize<item_c, set_c1, set_c2, set_c3, set_c4>(size, keydata);
-                mat = buildMatrixOfSize<item_c, set_c1, set_c2, set_c3, set_c4>(size, matdata);
+                mat = importMatrixOfSize<item_c, set_c1, set_c2, set_c3, set_c4>(size, matdata);
                 break;
             case 'D':
                 key = importMatrixOfSize<item_d, set_d1, set_d2, set_d3, set_d4>(size, keydata);
-                mat = buildMatrixOfSize<item_d, set_d1, set_d2, set_d3, set_d4>(size, matdata);
+                mat = importMatrixOfSize<item_d, set_d1, set_d2, set_d3, set_d4>(size, matdata);
                 break;
             default:
                 cmd->fail("Group '" + std::string(1, group) + "' is not valid");
                 return;
         }
-
-        mat = salt(mat);
 
         switch (type)
         {
@@ -73,22 +71,24 @@ namespace dla
             case 'Q':
                 for (int i = 0; i < iterations; i++)
                 {
-                    mat = mat / key;
+                    mat = mat * key;
                 }
             case 'p':
             case 'P':
                 for (int i = 0; i < iterations; i++)
                 {
-                    mat = mat * key;
+                    mat = mat / key;
                 }
         }
 
-        std::vector<uint8_t> ctext = getdata(mat);        
+        mat = desalt(mat);
+
+        std::vector<uint8_t> ptext = getraw(mat);        
         
         boost::filesystem::path ofile(cmd->getFlag("-o"));
         boost::filesystem::ofstream ofs{ofile};
 
-        ofs << std::string(ctext.begin(), ctext.end());
+        ofs << std::string(ptext.begin(), ptext.end());
 
         return;
     }
