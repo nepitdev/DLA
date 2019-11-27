@@ -48,6 +48,17 @@
         "ratio": "cpp",
         "variant": "cpp",
         "__config": "cpp",
-        "__nullptr": "cpp"
+        "__nullptr": "cpp",
+        "atomic": "cpp",
+        "codecvt": "cpp",
+        "complex": "cpp",
+        "list": "cpp",
+        "thread": "cpp",
+        "typeindex": "cpp",
+        "strstream": "cpp",
+        "valarray": "cpp",
+        "condition_variable": "cpp",
+        "csignal": "cpp",
+        "mutex": "cpp"
     }
 }

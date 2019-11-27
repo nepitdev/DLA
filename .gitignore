@@ -1,9 +1,9 @@
-dla
-obj/
+bin/
+test-results/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 dla-test.exe
-test-results/catch/results.xml
+dla.exe
